@@ -48,5 +48,10 @@ def falls_images(request):
     return render(request,'image/falls_images.html',{"images":images})
 
 
+def test_git_branch():
+    return HttpResponse("120")
+
+
+
 
 
