@@ -1,8 +1,7 @@
-from django.conf.urls import url,include
-from django.contrib import admin
+from django.conf.urls import url
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
-    # url(r'^article-column/$', views.article_column, name="article_column"),
-    # url('list-images/', views.list_images, name="list_images"),
+    url(r'^about/$', TemplateView.as_view(template_name="course/about.html")),
 ]

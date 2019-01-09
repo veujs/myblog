@@ -27,7 +27,7 @@ urlpatterns = [
     # url(r'^pwd_reset/', include("password_reset.urls", namespace='pwd_reset', app_name='pwd_reset')),
     url(r'^article/', include("article.urls", namespace="article", app_name='article')),
     url('^image/', include('image.urls', namespace='image', app_name='image')),
-    # url('^course/', include('course.urls', namespace='course', app_name='course')),
+    url('^course/', include('course.urls', namespace='course', app_name='course')),
     url(r'^home/', TemplateView.as_view(template_name="home.html"),name="home"),
 
 ]
