@@ -51,6 +51,9 @@ def falls_images(request):
 def test_git_branch():
     return HttpResponse("120")
 
+def fdfdf():
+	return 	SADFAS
+
 
 
 
