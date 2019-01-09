@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="row text-center vertical-middle-sm">
+        <p>您已经退出登录</p>
+        <p>您可以再次<a href="{% url 'account:user_login' %}">登录</a></p>
+    </div>
+
+{% endblock %}
+
+

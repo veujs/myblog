@@ -1,0 +1,100 @@
+{% extends "article/base.html" %}
+{% load staticfiles %}
+{% block title %}article list{% endblock %}
+{% block content %}
+<div>
+    <table class="table table-hover">
+        <tr>
+            <td>序号</td>
+            <td>标题</td>
+            <td>栏目</td>
+            <td>创建时间</td>
+            <td>操作</td>
+        </tr>
+
+        {% for article in articles %}
+        <tr id="{{ article.id }}">
+            <td>{{ forloop.counter }}</td>
+            <td><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></td>
+            <td>{{ article.column }}</td>
+            <td>{{ article.created }}</td>
+    	    <td>
+                <a name="edit" href="{% url 'article:redit_article' article.id %}" >
+					<span class="glyphicon glyphicon-pencil"></span>
+				</a>
+                <a name="delete" href="javascript:" onclick="delete_article(this, {{ article.id }})">
+					<span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span>
+				</a>
+			</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    {% include 'paginator.html' %}
+
+</div>
+
+
+<script type="text/javascript" src='{% static "common/js/jquery.js" %}'></script>
+<script type="text/javascript" src='{% static "common/js/layer.js"%}'></script>
+<script type="text/javascript">
+    // 列表数据修改
+	function delete_article(the, article_id){
+		var article_name = $(the).parents("tr").children("td").eq(1).text();
+		var index = layer.open({
+		type: 1,
+		skin: "layui-layer-rim",
+			area: ["400px", "200px"],
+			title: "删除文章",
+			content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除<<'+article_name+'》</p></div>',
+			btn:['确定', '取消'],
+			yes: function(index, layero){
+				$.ajax({
+					url: "{% url 'article:delete_article' %}",
+					type: "POST",
+					data: {"article_id": article_id},
+					success: function(e){
+					if(e==="1"){
+						parent.location.reload();
+							layer.msg("成功删除");
+						}else{
+						layer.msg("删除失败。")
+						}
+					},
+				});
+			},
+		});
+	}
+
+	// 删除栏目
+	function del_column(the, column_id){
+		var name = $(the).parents("tr").children("td").eq(1).text();
+		layer.open({
+		type: 1,
+		skin: "layui-layer-rim",
+		area: ["400px", "200px"],
+		title: "删除栏目",
+		content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除{'+name+'}栏目</p></div>',
+		btn:['确定', '取消'],
+		yes: function(){
+			$.ajax({
+			url: '{% url "article:delete_article_column" %}',
+			type:"POST",
+			data: {"column_id":column_id},
+			success: function(e){
+				if(e==="1"){
+				parent.location.reload();
+				layer.msg("has been deleted.");
+			}else{
+				layer.msg("删除失败");
+			}
+			},
+			})
+		},
+		});
+	}
+
+</script>
+
+{% endblock %}
+
