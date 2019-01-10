@@ -22,7 +22,7 @@
     	        <a name="edit" href="#"><span class="glyphicon glyphicon-pencil"></span></a>
                 <!--a nane="delete" href="{% url 'course:delete_course' course.id %}" ><span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span></a-->
                 <a class="delete" name="delete" href="{% url 'course:delete_course' course.id %}" ><span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span></a>
-            </td>
+    	        <a href="{% url 'course:list_lesson' course.id %}"><span class="glyphicon glyphicon-search" style="margin-left:20px;"></span></a>			</td>
     	</tr>
     	{% endfor %}
     </table>
