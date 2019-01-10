@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'account',
     'article',
+    'django.contrib.sites',
     'image',
     'course',
     'sorl.thumbnail'

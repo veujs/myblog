@@ -24,6 +24,8 @@ def upload_image(request):
             return JsonResponse({'status':"1"})
         except:
             return JsonResponse({'status':"0"})
+    else:
+        return HttpResponse("表单类验证失败！有可能图片地址有问题")
 
 @login_required(login_url='/account/login/')
 def list_images(request):
@@ -48,8 +50,8 @@ def falls_images(request):
     return render(request,'image/falls_images.html',{"images":images})
 
 
-def test_git_branch():
-    return HttpResponse("120")
+# def test_git_branch():
+#     return HttpResponse("120")
 
 
 
